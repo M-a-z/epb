@@ -1,0 +1,21 @@
+COMPILING:
+
+Go to package root folder (folder where this file resides) and type 
+
+make
+
+
+INSTALL:
+
+type make install 
+
+(propably requires root privileges)
+
+Open and check the makefile. It is simple. Thus it is understandable. As you see, install target copies epb to /usr/bin. It does not check if you already have a file called epb there. So if you want to be sure you're not overwriting anything, do:
+
+ls /usr/bin | grep epb
+
+If you see a file called epb there, then you propably should not install this binary to /usr/bin. You can rename it and do copying file manually. Then your command just won't be epb, but what you renamed it to. (ebp will propably launch the other program you had in /usr/bin).
+
+Another thing the install target does, is installing man pages. It will copy man pages to /usr/share/man/man8 by default. It is possible your distribution does have man pages at some other location. In that case you should modify the path to man correct in Makefile.
+ 

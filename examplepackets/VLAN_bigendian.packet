@@ -1,0 +1,46 @@
+#example package for the epb - Ethrnet Package Bombardier
+#mac addrs
+u8:0xaa
+u8:0xaa
+u8:0xaa
+u8:0xbb
+u8:0xbb
+u8:0xbb
+u8:0xff
+u8:0x78
+u8:0x30
+u8:0x72
+u8:0x13
+u8:0x0
+#802.1q
+#u32:4294967425 
+#ethertype
+u16:8
+#<<end of ethernet header
+#>>IPv4 header begins
+#Version + IP hdr len
+u8:69
+#DSCP set bits: 	ECN set bits: 
+u8:0
+#Totallen
+u16:5120
+#Identification
+u16:0
+#Flags + fragment offset
+#MF bit NOT set
+#DF bit IS set
+#Evil bit NOT set
+u16:16384
+#TTL
+u8:255
+#Protocol
+u8:0
+#Checksum
+u16:0
+#SRC IP
+#192.168.255.1
+u32:3232300801
+#DST IP
+#192.168.255.1
+u32:3232300801
+#>>IPv4 header ends

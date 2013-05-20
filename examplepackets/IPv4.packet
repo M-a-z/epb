@@ -1,0 +1,51 @@
+#example package for the epb - Ethrnet Package Bombardier
+#
+#Ethernet header
+#Dst
+u8:0x0e
+u8:0
+u8:0
+u8:1
+u8:1
+u8:1
+#src
+u8:0
+u8:0x40
+u8:0x43
+u8:0x30
+u8:0x83
+u8:0x32
+#type
+u16:0x800
+#<!-- IP header -->
+#<!-- version + len -->
+u8:0x45
+#<!-- TOS (type of service/differentiated services --> 
+u8:0x48
+#<!-- total len -->
+u16:0x002A
+#<!-- identification -->
+u16:0x0001
+#<!-- If set to 0, kernel will fill this -->
+#<!-- Flags+fragment offset -->
+u16:0
+#<!-- TTL -->
+u8:0
+#<!-- protocol (UDP)-->
+u8:0x11
+#<!-- header checksum -->
+#u16:0xb3c9
+u16:0
+#<!-- source address -->
+u32:0x11527289
+#<!-- destination address -->
+u32:0x11527283
+#<!-- UDP header -->
+#<!-- src port -->
+u16:0xEA60
+#<!-- dst port -->
+u16:0xFFFB
+#<!-- lenght -->
+u16:8
+#<!-- checksum -->
+u16:0x0
