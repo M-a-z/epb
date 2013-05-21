@@ -1,0 +1,90 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
+<HTML> <HEAD> 
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<META NAME="Author" CONTENT="Matti Vaittinen">
+<META NAME="Description" CONTENT="epb - ethernet packet generator">
+<META NAME="Keywords" CONTENT="epb, etherner, packet, generate, convert, C, pcap, pcapng, snoop, netmon">
+<META NAME="Language" CONTENT="EN">
+<META NAME="Abstract" CONTENT="epb - ethernet packet generator">
+<META NAME="Designer" CONTENT="Matti Vaittinen">
+<META NAME="Distribution" CONTENT="Global">  
+<META NAME="Robots" CONTENT="All">  
+<!--<LINK REL="SHORTCUT ICON" HREF="http://www.student.oulu.fi/~mavaitti/images/av2.ico"> -->
+<LINK REL="stylesheet" TYPE="text/css" href="style/epb.css">   
+<TITLE>MazPong - pong game playable over network</TITLE>  
+</HEAD>     
+<body> 
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2999778840133894";
+/* banneri */
+google_ad_slot = "1226030022";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+<center><h1 class="header">epb - ethernet packet bombardier</h1></center>
+<br />
+<h2 class="header2">What is epb</h2>
+<p class="normal_chapter">
+<a href="http://maz-programmersdiary.blogspot.fi/2012/06/man-pages-for-epb.html">Man pages for version 1.6rc</a> explain it best. <br />
+Epb is a tool allowing one to send customized ethernet packages. Package is specified in text file. No GUI offered, but also not many libraries needed. Also understanding what code does is easy. Originally epb was intended just to be a simple way to quickly generate single custom package to network. Now it can also be used to:
+<ol>
+<li>generate sequence of packages (similar human readable package format)</li>
+<li>send packet sequence captured using libpcap/pcapng (tcpdump, wireshark,...) snoop (SUN's packet sniffer) or netmon (Microsoft's sniffer for windows - currently only versions 1 and 2 supported)</li>
+<li>select packets from pcap/snoop files based on src/dst mac address or ethernet header's ethertype field.</li>
+</ol>
+
+<h2 class="header2">File format:</h2>
+<p class="normal_chapter">
+20.12.2012 v1.6 - package has limited support for sending/ converting pcapng files
+epb 1.6 (Energy Saving Led Light Sabre) is available for download as <a href="http://xp-dev.com/svn/epb/tarballs/1.6_fixed.tar.gz">tarball</a>
+<p class="normal_chapter">
+XX.08.2012 Experimantal 1.5_2 package supports converting pcap files to editable epb2 text format allowing making modifications to pcap trace before resending it.
+Experimantal 1.5_2 (Really Incoherent Laser) is available for download as <a href="http://xp-dev.com/svn/epb/tarballs/epb_1.5_2.tar.gz">tarball</a>
+<p class="normal_chapter">
+18.07.2012 Epb 1.5 provides support for netmon and (better) stripping pcap+snoop files.
+Epb 1.5 (Incoherent Laser) is available as <a href="http://xp-dev.com/svn/epb/tarballs/epb_1.5.tar.gz">tarball</a>. This version can read and send also snoop (SUN's sniffer format) and cap files (version 1 and 2 of Microsoft's NetMon files). Also stripping packets can now be done for snoop format too. Furthermore it is now possible to select packets based on ethernet header's ether type field.
+<p class="normal_chapter">
+13.07.2012 - epb version 1.4 (Two Handed Scissors) is there for testing.
+After two days of coding like... well... me there is experimental pcap format support. 1.4 version allows you to send packets using pcap file. You can for example send packets captured using tcpdump or wireshark. Epb also includes support for stripping only packages sent from/to certain mac address. 1.4 is available for testing as a <a href="http://xp-dev.com/svn/epb/tarballs/epb_1.4.tar.gz">tarball</a>.
+<p class="normal_chapter">
+11.07.2012 - epb version 1.3 (Cold Fusion Bomb) is out! This version adds support for epb file format 2 - allowing epb to be used for sending sequence of packages. Note that 1.3 has gone through some major changes, and I am expecting few bugs to be included... Please please please, let me know if you encounter problems. File format version 2 is explained in version 1.3 man pages. Also there is example file in epb 1.3 <a href="http://xp-dev.com/svn/epb/tarballs/epb_1.3.tar.gz">tarball</a>. Text below describes version 1 format (which is still supported though).
+<p class="normal_chapter">
+Package is specified in text file, in format: <datatype>:<value> One item / row.
+<p class="normal_chapter">
+Possible datatypes are:  u8,i8,u16,i16,u32,i32,u64 and i64, meaning either signed (i) or unsigned (u) values.
+<p class="normal_chapter">
+Numeric part of datatype tell the width of value in bits. A colon  (:) is used to separate data type and value fields. Value is given as number, defaulting to base 10 integer. However, if value is prefixed with 0x, then it is interpreted as hexadecimal. Lines beginnign with hash (#) - mark are interpreted as comments. There is few example files in examplepackets directory.
+<h2 class="header2">Obtaining it:</h2>
+<p class="normal_chapter">
+<a href="http://xp-dev.com/svn/epb/tarballs/1.6_fixed.tar.gz">epb 1.6 tarball</a> limited pcapng support. (sending and converting to epb2)<br />
+<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.5.tar.gz">epb 1.5 tarball</a> snoop and netmon 1 &amp; 2 file format support + stripping packet from snoop and pcap captures based on mac addresses or ether type<br />
+<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.4.tar.gz">epb 1.4 tarball</a> experimental pcap (libpcap) file format support<br />
+<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.3.tar.gz">epb 1.3 tarball</a> <br />
+<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.2.tar.gz">epb 1.2 tarball.</a> <br />
+<p class="normal_chapter">
+Tarballs include sources, manpages and static binaries for x86. Go to folder where Makefile is located and type<br />
+<p class="command_example">
+make <br />
+sudo make install<br />
+<p class="normal_chapter">
+Now command 
+<p class="command_example">
+epb -h 
+<p class="normal_chapter">
+should give you quick help, and 
+<p class="command_example">
+man epb 
+<p class="normal_chapter">
+display the man pages. Obtain current development sources from <a href="https://github.com/M-a-z/epb">github</a>.<br /><br /><br />
+
+<p class="footer">
+Matti 'Maz'  Vaittinen, Oulu, FINLAND email: mazziesaccount@gmail.com
+</body>
+</html>
