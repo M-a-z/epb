@@ -5,10 +5,17 @@
   font-family: sans;
   margin: 50px;
  }
- :link { color: #DFD3D6 }
 .normal_chapter{
 margin: 20px;
 }
+div.version_history{
+    font-family:Bookman Old Style, Century, Times New Roman; color:yellow; font-size:10pt; text-align: center;
+}
+.normal_chapter A:active {color:white;text-decoration:none}
+.normal_chapter A:link {color:#0099ff;text-decoration:none}
+.normal_chapter A:visited {color:#900090;text-decoration:none}
+.normal_chapter A:hover {color:white;text-decoration:underline}
+
 .command_example{
 font-family:Bookman Old Style, Century, Times New Roman; color:#FF6633; font-size:10pt; Vertical-Align:text-top;
 }

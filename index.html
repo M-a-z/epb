@@ -12,7 +12,7 @@
 <META NAME="Robots" CONTENT="All">  
 <!--<LINK REL="SHORTCUT ICON" HREF="http://www.student.oulu.fi/~mavaitti/images/av2.ico"> -->
 <LINK REL="stylesheet" TYPE="text/css" href="style/epb.css">   
-<TITLE>MazPong - pong game playable over network</TITLE>  
+<TITLE>epb - ethernet packet generator</TITLE>  
 </HEAD>     
 <body> 
 
@@ -34,11 +34,11 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <p class="normal_chapter">
 <a href="http://maz-programmersdiary.blogspot.fi/2012/06/man-pages-for-epb.html">Man pages for version 1.6rc</a> explain it best. <br />
 Epb is a tool allowing one to send customized ethernet packages. Package is specified in text file. No GUI offered, but also not many libraries needed. Also understanding what code does is easy. Originally epb was intended just to be a simple way to quickly generate single custom package to network. Now it can also be used to:
-<ol>
+<ul>
 <li>generate sequence of packages (similar human readable package format)</li>
 <li>send packet sequence captured using libpcap/pcapng (tcpdump, wireshark,...) snoop (SUN's packet sniffer) or netmon (Microsoft's sniffer for windows - currently only versions 1 and 2 supported)</li>
 <li>select packets from pcap/snoop files based on src/dst mac address or ethernet header's ethertype field.</li>
-</ol>
+</ul>
 
 <h2 class="header2">File format:</h2>
 <p class="normal_chapter">
@@ -60,7 +60,7 @@ Package is specified in text file, in format: <datatype>:<value> One item / row.
 <p class="normal_chapter">
 Possible datatypes are:  u8,i8,u16,i16,u32,i32,u64 and i64, meaning either signed (i) or unsigned (u) values.
 <p class="normal_chapter">
-Numeric part of datatype tell the width of value in bits. A colon  (:) is used to separate data type and value fields. Value is given as number, defaulting to base 10 integer. However, if value is prefixed with 0x, then it is interpreted as hexadecimal. Lines beginnign with hash (#) - mark are interpreted as comments. There is few example files in examplepackets directory.
+Numeric part of datatype tell the width of value in bits. A colon  (:) is used to separate data type and value fields. Value is given as number, defaulting to base 10 integer. However, if value is prefixed with 0x, then it is interpreted as hexadecimal. Lines beginnign with hash (#) - mark are interpreted as comments. There is few example files in <a href="https://github.com/M-a-z/epb/tree/master/examplepackets">examplepackets directory</a>.
 <h2 class="header2">Obtaining it:</h2>
 <p class="normal_chapter">
 <a href="http://xp-dev.com/svn/epb/tarballs/1.6_fixed.tar.gz">epb 1.6 tarball</a> limited pcapng support. (sending and converting to epb2)<br />
@@ -83,7 +83,90 @@ should give you quick help, and
 man epb 
 <p class="normal_chapter">
 display the man pages. Obtain current development sources from <a href="https://github.com/M-a-z/epb">github</a>.<br /><br /><br />
+<br />
+<br />
+<hr>
+<br />
+<br />
+<br />
+<div class="version_history">
+Some version history:<br />
+<h4>1.6 Energy Saving Led Light Sabre</h4>
+<ul>
+<li>Limited support for sending (or converting to text) the pcapng traces. 1.5_2 Really Incoherent Laser</li>
+<li>Support for converting pcap traces to epb2 format for editing before send.</li>
+<ul>
 
+<h4>1.5 Incoherent Laser</h4>
+<ul>
+<li>man pages updated</li>
+<li>further refactored code - stripping of snoop files - --strip-ether-type option to select packets based on ether type. 1.5 beta</li>
+<li>man page update</li>
+<li> snoop (SUN's sniffer) file format</li>
+<li> NetMon version 1 and 2 file format (MS NetMon)</li>
+</ul>
+<h4>1.4 Two Handed Scissors</h4>
+<ul>
+    <li>man page update</li>
+    <li>pcap (libpcap) file format support.</li>
+    <li>pcap file stripper.</li>
+    <li>almost total redesign for parsers. More modular structure easing adding different file parsers</li>
+</ul>
+
+<h4>1.3 Cold Fusion Bomb:</h4>
+<ul>
+    <li>man pages updated</li>
+    <li>icmp6 echo example using epb file format version 2</li>
+    <li>Added possibility to generate sequence of different packets (epb file format v2)</li>
+    <li>Added possibility to specify packets from stdin.</li>
+    <li>Added long options.</li>
+    <li>refactored code and decreased memory usage.</li>
+</ul>
+
+<h4>1.2 (Rubber Bullet)</h4>
+<ul>
+    <li>environment checks</li>
+    <li>forced compiling to be 32 bit</li>
+</ul>
+
+<h4>1.1 (Bladeless Dagger)</h4>
+<ul>
+    <li>Fixed IPv4 detection bug when 802.1q VLAN tagging is used</li>
+    <li>Fixed IPv4 detection bug when endianess conversion was not done.</li>
+    <li>Removed unnecessary debugprints</li>
+    <li>added -m flag for using real mac address</li>
+    <li>added -c flag for not touching the checksum even if it was 0</li>
+    <li>man page update</li>
+</ul>
+
+<h4>1.0 (Overweight Ninja)</h4>
+<ul>
+    <li>added -e flag to maintain endianess.</li>
+    <li>fixed some print issues</li>
+    <li>figed command line param parsing (no order requirements)</li>
+    <li>changed binary name to epb</li>
+</ul>
+
+<h4>0.3 (Blind Sniper)</h4>
+<ul>
+    <li>IP target usage fixed</li>
+    <li>safer default interval</li>
+    <li>updated DO_NOT_READ_ME.txt</li>
+</ul>
+
+<h4>0.2 (Singlefire Sergei)</h4>
+<ul>
+    <li>removed unnecessary commandline parameters</li>
+    <li>added -w option</li>
+    <li>bugfixes.</li>
+    <li>*nix style params</li>
+</ul>
+
+<h4>0.1 (Barely Flying Fortress)</h4>
+<ul>
+    <li>Initial release.</li>
+</ul>
+</div>
 <p class="footer">
 Matti 'Maz'  Vaittinen, Oulu, FINLAND email: mazziesaccount@gmail.com
 </body>
