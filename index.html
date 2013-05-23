@@ -15,7 +15,7 @@
 <TITLE>epb - ethernet packet generator</TITLE>  
 
 
-<script>
+<script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -45,10 +45,10 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 
 <center><h1 class="header">epb - ethernet packet bombardier</h1></center>
-<br />
+<br>
 <h2 class="header2">What is epb</h2>
 <p class="normal_chapter">
-<a href="http://maz-programmersdiary.blogspot.fi/2012/06/man-pages-for-epb.html">Man pages for version 1.6rc</a> explain it best. <br />
+<a href="http://maz-programmersdiary.blogspot.fi/2012/06/man-pages-for-epb.html">Man pages for version 1.6rc</a> explain it best. <br>
 Epb is a tool allowing one to send customized ethernet packages. Package is specified in text file. No GUI offered, but also not many libraries needed. Also understanding what code does is easy. Originally epb was intended just to be a simple way to quickly generate single custom package to network. Now it can also be used to:
 <ul>
 <li>generate sequence of packages (similar human readable package format)</li>
@@ -72,23 +72,23 @@ After two days of coding like... well... me there is experimental pcap format su
 <p class="normal_chapter">
 11.07.2012 - epb version 1.3 (Cold Fusion Bomb) is out! This version adds support for epb file format 2 - allowing epb to be used for sending sequence of packages. Note that 1.3 has gone through some major changes, and I am expecting few bugs to be included... Please please please, let me know if you encounter problems. File format version 2 is explained in version 1.3 man pages. Also there is example file in epb 1.3 <a href="http://xp-dev.com/svn/epb/tarballs/epb_1.3.tar.gz">tarball</a>. Text below describes version 1 format (which is still supported though).
 <p class="normal_chapter">
-Package is specified in text file, in format: <datatype>:<value> One item / row.
+Package is specified in text file, in format: &lt;datatype&gt;:&lt;value&gt; One item / row.
 <p class="normal_chapter">
 Possible datatypes are:  u8,i8,u16,i16,u32,i32,u64 and i64, meaning either signed (i) or unsigned (u) values.
 <p class="normal_chapter">
 Numeric part of datatype tell the width of value in bits. A colon  (:) is used to separate data type and value fields. Value is given as number, defaulting to base 10 integer. However, if value is prefixed with 0x, then it is interpreted as hexadecimal. Lines beginnign with hash (#) - mark are interpreted as comments. There is few example files in <a href="https://github.com/M-a-z/epb/tree/master/examplepackets">examplepackets directory</a>.
 <h2 class="header2">Obtaining it:</h2>
 <p class="normal_chapter">
-<a href="http://xp-dev.com/svn/epb/tarballs/1.6_fixed.tar.gz">epb 1.6 tarball</a> limited pcapng support. (sending and converting to epb2)<br />
-<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.5.tar.gz">epb 1.5 tarball</a> snoop and netmon 1 &amp; 2 file format support + stripping packet from snoop and pcap captures based on mac addresses or ether type<br />
-<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.4.tar.gz">epb 1.4 tarball</a> experimental pcap (libpcap) file format support<br />
-<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.3.tar.gz">epb 1.3 tarball</a> <br />
-<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.2.tar.gz">epb 1.2 tarball.</a> <br />
+<a href="http://xp-dev.com/svn/epb/tarballs/1.6_fixed.tar.gz">epb 1.6 tarball</a> limited pcapng support. (sending and converting to epb2)<br>
+<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.5.tar.gz">epb 1.5 tarball</a> snoop and netmon 1 &amp; 2 file format support + stripping packet from snoop and pcap captures based on mac addresses or ether type<br>
+<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.4.tar.gz">epb 1.4 tarball</a> experimental pcap (libpcap) file format support<br>
+<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.3.tar.gz">epb 1.3 tarball</a> <br>
+<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.2.tar.gz">epb 1.2 tarball.</a> <br>
 <p class="normal_chapter">
-Tarballs include sources, manpages and static binaries for x86. Go to folder where Makefile is located and type<br />
+Tarballs include sources, manpages and static binaries for x86. Go to folder where Makefile is located and type<br>
 <p class="command_example">
-make <br />
-sudo make install<br />
+make <br>
+sudo make install<br>
 <p class="normal_chapter">
 Now command 
 <p class="command_example">
@@ -98,20 +98,20 @@ should give you quick help, and
 <p class="command_example">
 man epb 
 <p class="normal_chapter">
-display the man pages. Obtain current development sources from <a href="https://github.com/M-a-z/epb">github</a>.<br /><br /><br />
-<br />
-<br />
+display the man pages. Obtain current development sources from <a href="https://github.com/M-a-z/epb">github</a>.<br><br><br>
+<br>
+<br>
 <hr>
-<br />
-<br />
-<br />
+<br>
+<br>
+<br>
 <div class="version_history">
-Some version history:<br />
+Some version history:<br>
 <h4>1.6 Energy Saving Led Light Sabre</h4>
 <ul>
 <li>Limited support for sending (or converting to text) the pcapng traces. 1.5_2 Really Incoherent Laser</li>
 <li>Support for converting pcap traces to epb2 format for editing before send.</li>
-<ul>
+</ul>
 
 <h4>1.5 Incoherent Laser</h4>
 <ul>
@@ -184,26 +184,29 @@ Some version history:<br />
 </ul>
 </div>
 
-<br />
-<br />
-<br />
-<br />
-<br />
+<br>
+<br>
+<br>
+<br>
+<br>
 <p class="other_projects">
-See also my other projects:<br />
+See also my other projects:<br>
 <a href="http://m-a-z.github.io/thongs/">thongs - raw ethernet packet sniffer/generator</a> |
 <a href="http://m-a-z.github.io/nibbles/">nibbles - UDP print listener</a> |
 <a href="http://m-a-z.github.io/nsn/">NSN - Network Status Notifier</a> | 
 <p class="footer">
 Matti 'Maz'  Vaittinen, Oulu, FINLAND email: mazziesaccount@gmail.com
 <p>
-<b>Liked this program</b> <br /><i>Donate to help me spend more time developing these =)</i><br />
+<b>Liked this program</b> <br><i>Donate to help me spend more time developing these =)</i><br>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick" />
-<input type="hidden" name="hosted_button_id" value="K5ULTZQSUMWC2" />
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" />
-
-
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="K5ULTZQSUMWC2">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
+</form>
+<p>
+    <a href="http://validator.w3.org/check?uri=referer"><img
+      src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01 Transitional" height="31" width="88"></a>
+  </p>
 
 </body>
 </html>
