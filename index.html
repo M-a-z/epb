@@ -1,72 +1,53 @@
 ---
-  layout: dummy
+  layout: basic
+  meta_description: epb - ethernet packet generator
+  meta_keywords: epb, etherner, packet, generate, convert, C, pcap, pcapng, snoop, netmon
+  css_file: style/epb.css
+  title: epb - ethernet packet generator
 ---
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
-<HTML> <HEAD> 
-<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
-<META NAME="Author" CONTENT="Matti Vaittinen">
-<META NAME="Description" CONTENT="epb - ethernet packet generator">
-<META NAME="Keywords" CONTENT="epb, etherner, packet, generate, convert, C, pcap, pcapng, snoop, netmon">
-<META NAME="Language" CONTENT="EN">
-<META NAME="Abstract" CONTENT="epb - ethernet packet generator">
-<META NAME="Designer" CONTENT="Matti Vaittinen">
-<META NAME="Distribution" CONTENT="Global">  
-<META NAME="Robots" CONTENT="All">  
-<!--<LINK REL="SHORTCUT ICON" HREF="http://www.student.oulu.fi/~mavaitti/images/av2.ico"> -->
-<LINK REL="stylesheet" TYPE="text/css" href="style/epb.css">   
-<TITLE>epb - ethernet packet generator</TITLE>  
-
-{% include google_analytics.html %}
-</HEAD>     
-<body> 
-{% include ad_banner.html %}
-<center><h1 class="header">epb - ethernet packet bombardier</h1></center>
+<h1 class="header">epb - ethernet packet bombardier</h1>
 <br>
 <h2 class="header2">What is epb</h2>
 <p class="normal_chapter">
-<a href="http://maz-programmersdiary.blogspot.fi/2012/06/man-pages-for-epb.html">Man pages for version 1.6rc</a> explain it best. <br>
-Epb is a tool allowing one to send customized ethernet packages. Package is specified in text file. No GUI offered, but also not many libraries needed. Also understanding what code does is easy. Originally epb was intended just to be a simple way to quickly generate single custom package to network. Now it can also be used to:
+Epb is a tool allowing one to send customized ethernet packets. Packet is specified in a file (see supported file tybes below). No GUI offered, but also not many libraries needed. Thus understanding what code does is easy. Originally epb was intended just to be a simple way to quickly generate single custom packet to network. Now it can also be used to:
 <ul>
-<li>generate sequence of packages (similar human readable package format)</li>
-<li>send packet sequence captured using libpcap/pcapng (tcpdump, wireshark,...) snoop (SUN's packet sniffer) or netmon (Microsoft's sniffer for windows - currently only versions 1 and 2 supported)</li>
+<li>generate sequence of packets from human readable text file</li>
+<li>send packet sequence from capture file: 
+  <ul>
+    <li>libpcap/pcapng - tcpdump, wireshark,...</li>
+    <li> snoop (SUN's packet sniffer)</li>
+    <li> netmon (Microsoft's sniffer for windows - currently only versions 1 and 2 supported)</li>
+  </ul>
+</li>
 <li>select packets from pcap/snoop files based on src/dst mac address or ethernet header's ethertype field.</li>
 </ul>
 
-<h2 class="header2">File format:</h2>
+<h2 class="header2">Epb human readable text file formats:</h2>
 <p class="normal_chapter">
-20.12.2012 v1.6 - package has limited support for sending/ converting pcapng files
-epb 1.6 (Energy Saving Led Light Sabre) is available for download as <a href="http://xp-dev.com/svn/epb/tarballs/1.6_fixed.tar.gz">tarball</a>
-<p class="normal_chapter">
-XX.08.2012 Experimantal 1.5_2 package supports converting pcap files to editable epb2 text format allowing making modifications to pcap trace before resending it.
-Experimantal 1.5_2 (Really Incoherent Laser) is available for download as <a href="http://xp-dev.com/svn/epb/tarballs/epb_1.5_2.tar.gz">tarball</a>
-<p class="normal_chapter">
-18.07.2012 Epb 1.5 provides support for netmon and (better) stripping pcap+snoop files.
-Epb 1.5 (Incoherent Laser) is available as <a href="http://xp-dev.com/svn/epb/tarballs/epb_1.5.tar.gz">tarball</a>. This version can read and send also snoop (SUN's sniffer format) and cap files (version 1 and 2 of Microsoft's NetMon files). Also stripping packets can now be done for snoop format too. Furthermore it is now possible to select packets based on ethernet header's ether type field.
-<p class="normal_chapter">
-13.07.2012 - epb version 1.4 (Two Handed Scissors) is there for testing.
-After two days of coding like... well... me there is experimental pcap format support. 1.4 version allows you to send packets using pcap file. You can for example send packets captured using tcpdump or wireshark. Epb also includes support for stripping only packages sent from/to certain mac address. 1.4 is available for testing as a <a href="http://xp-dev.com/svn/epb/tarballs/epb_1.4.tar.gz">tarball</a>.
-<p class="normal_chapter">
-11.07.2012 - epb version 1.3 (Cold Fusion Bomb) is out! This version adds support for epb file format 2 - allowing epb to be used for sending sequence of packages. Note that 1.3 has gone through some major changes, and I am expecting few bugs to be included... Please please please, let me know if you encounter problems. File format version 2 is explained in version 1.3 man pages. Also there is example file in epb 1.3 <a href="http://xp-dev.com/svn/epb/tarballs/epb_1.3.tar.gz">tarball</a>. Text below describes version 1 format (which is still supported though).
-<p class="normal_chapter">
-Package is specified in text file, in format: &lt;datatype&gt;:&lt;value&gt; One item / row.
-<p class="normal_chapter">
-Possible datatypes are:  u8,i8,u16,i16,u32,i32,u64 and i64, meaning either signed (i) or unsigned (u) values.
+<b>epb file format version 1</b><br> 
+Packet is specified in text file, in format: &lt;datatype&gt;:&lt;value&gt; One item / row. Possible datatypes are:<br>
+u8,i8,u16,i16,u32,i32,u64 and i64,<br>
+meaning either signed (i) or unsigned (u) values.
 <p class="normal_chapter">
 Numeric part of datatype tell the width of value in bits. A colon  (:) is used to separate data type and value fields. Value is given as number, defaulting to base 10 integer. However, if value is prefixed with 0x, then it is interpreted as hexadecimal. Lines beginnign with hash (#) - mark are interpreted as comments. There is few example files in <a href="https://github.com/M-a-z/epb/tree/master/examplepackets">examplepackets directory</a>.
-<h2 class="header2">Obtaining it:</h2>
 <p class="normal_chapter">
-<a href="http://xp-dev.com/svn/epb/tarballs/1.6_fixed.tar.gz">epb 1.6 tarball</a> limited pcapng support. (sending and converting to epb2)<br>
-<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.5.tar.gz">epb 1.5 tarball</a> snoop and netmon 1 &amp; 2 file format support + stripping packet from snoop and pcap captures based on mac addresses or ether type<br>
-<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.4.tar.gz">epb 1.4 tarball</a> experimental pcap (libpcap) file format support<br>
-<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.3.tar.gz">epb 1.3 tarball</a> <br>
-<a href="http://xp-dev.com/svn/epb/tarballs/epb_1.2.tar.gz">epb 1.2 tarball.</a> <br>
+
+
+<b>epb file format 2</b><br> 
+Allows epb to be used for sending sequence of packages. Basically version 2 adds fields specifying packet send timing and some other information. The packet itself is described similar to epb 1 packet. File format version 2 is properly explained man pages. Also there is example file in epb 1.3 <a href="http://xp-dev.com/svn/epb/tarballs/epb_1.3.tar.gz">tarball</a>. 
+
+<h2 class="header2">Compilation and installation</h2>
 <p class="normal_chapter">
-Tarballs include sources, manpages and static binaries for x86. Go to folder where Makefile is located and type<br>
+Compile using command
 <p class="command_example">
 make <br>
-sudo make install<br>
 <p class="normal_chapter">
-Now command 
+and install binaries and man pages with
+sudo make install<br>
+
+<h3 class="header2">More information</h3>
+<p class="normal_chapter">
+Command 
 <p class="command_example">
 epb -h 
 <p class="normal_chapter">
@@ -74,91 +55,5 @@ should give you quick help, and
 <p class="command_example">
 man epb 
 <p class="normal_chapter">
-display the man pages. Obtain current development sources from <a href="https://github.com/M-a-z/epb">github</a>.<br><br><br>
-<br>
-<br>
-<hr>
-<br>
-<br>
-<br>
-<div class="version_history">
-Some version history:<br>
-<h4>1.6 Energy Saving Led Light Sabre</h4>
-<ul>
-<li>Limited support for sending (or converting to text) the pcapng traces. 1.5_2 Really Incoherent Laser</li>
-<li>Support for converting pcap traces to epb2 format for editing before send.</li>
-</ul>
+display the man pages. 
 
-<h4>1.5 Incoherent Laser</h4>
-<ul>
-<li>man pages updated</li>
-<li>further refactored code - stripping of snoop files - --strip-ether-type option to select packets based on ether type. 1.5 beta</li>
-<li>man page update</li>
-<li> snoop (SUN's sniffer) file format</li>
-<li> NetMon version 1 and 2 file format (MS NetMon)</li>
-</ul>
-<h4>1.4 Two Handed Scissors</h4>
-<ul>
-    <li>man page update</li>
-    <li>pcap (libpcap) file format support.</li>
-    <li>pcap file stripper.</li>
-    <li>almost total redesign for parsers. More modular structure easing adding different file parsers</li>
-</ul>
-
-<h4>1.3 Cold Fusion Bomb:</h4>
-<ul>
-    <li>man pages updated</li>
-    <li>icmp6 echo example using epb file format version 2</li>
-    <li>Added possibility to generate sequence of different packets (epb file format v2)</li>
-    <li>Added possibility to specify packets from stdin.</li>
-    <li>Added long options.</li>
-    <li>refactored code and decreased memory usage.</li>
-</ul>
-
-<h4>1.2 (Rubber Bullet)</h4>
-<ul>
-    <li>environment checks</li>
-    <li>forced compiling to be 32 bit</li>
-</ul>
-
-<h4>1.1 (Bladeless Dagger)</h4>
-<ul>
-    <li>Fixed IPv4 detection bug when 802.1q VLAN tagging is used</li>
-    <li>Fixed IPv4 detection bug when endianess conversion was not done.</li>
-    <li>Removed unnecessary debugprints</li>
-    <li>added -m flag for using real mac address</li>
-    <li>added -c flag for not touching the checksum even if it was 0</li>
-    <li>man page update</li>
-</ul>
-
-<h4>1.0 (Overweight Ninja)</h4>
-<ul>
-    <li>added -e flag to maintain endianess.</li>
-    <li>fixed some print issues</li>
-    <li>figed command line param parsing (no order requirements)</li>
-    <li>changed binary name to epb</li>
-</ul>
-
-<h4>0.3 (Blind Sniper)</h4>
-<ul>
-    <li>IP target usage fixed</li>
-    <li>safer default interval</li>
-    <li>updated DO_NOT_READ_ME.txt</li>
-</ul>
-
-<h4>0.2 (Singlefire Sergei)</h4>
-<ul>
-    <li>removed unnecessary commandline parameters</li>
-    <li>added -w option</li>
-    <li>bugfixes.</li>
-    <li>*nix style params</li>
-</ul>
-
-<h4>0.1 (Barely Flying Fortress)</h4>
-<ul>
-    <li>Initial release.</li>
-</ul>
-</div>
-{% include footer.html %}
-</body>
-</html>
