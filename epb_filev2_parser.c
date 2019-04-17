@@ -18,14 +18,14 @@ static int parse_phead(SEpbPacketParser *_this,  SEpbParams *newpkg, SCommParams
     int mandatory_fields_filled=0;
     int scanned;
     /* read possible comments */
-    while((scanned=fscanf(_this->fptr,"#%a[^\n]\n",&line)))
+    while((scanned=fscanf(_this->fptr,"#%m[^\n]\n",&line)))
     {
         if(EOF==scanned)
             return PARSER_READ_EOF;
         free(line);
     }
     /* read packet start tag */
-    scanned=fscanf(_this->fptr,"!%a[^\n]\n",&line);
+    scanned=fscanf(_this->fptr,"!%m[^\n]\n",&line);
     if(scanned!=1 || strcmp(line,"packet_start"))
     {
         printf("Bad packet header, cant find !packet_start - field\n");
@@ -41,7 +41,7 @@ static int parse_phead(SEpbPacketParser *_this,  SEpbParams *newpkg, SCommParams
     for(lineno=1;;lineno++)
     {
         int scanned;
-        scanned=fscanf(_this->fptr,"#%a[^\n]\n",&line);
+        scanned=fscanf(_this->fptr,"#%m[^\n]\n",&line);
         if(scanned>0)
         {
             free(line);
@@ -52,7 +52,7 @@ static int parse_phead(SEpbPacketParser *_this,  SEpbParams *newpkg, SCommParams
             printf("Premature EOF in the middle of packet header!\n");
             return -1;
         }
-        scanned=fscanf(_this->fptr,"!%a[^\n^ ]",&line);
+        scanned=fscanf(_this->fptr,"!%m[^\n^ ]",&line);
         if(scanned>0)
         {
             
@@ -75,7 +75,7 @@ static int parse_phead(SEpbPacketParser *_this,  SEpbParams *newpkg, SCommParams
             }
             else if(!strcmp(line,"startdelay"))
             {
-                if(1==fscanf(_this->fptr,"%a[^\n]\n",&line2))
+                if(1==fscanf(_this->fptr,"%m[^\n]\n",&line2))
                 {
                     if(argchk(line2, 0, 0xffffffffUL/1000000UL,(unsigned long *) &(newpkg->startdelay)))
                     {
@@ -93,7 +93,7 @@ static int parse_phead(SEpbPacketParser *_this,  SEpbParams *newpkg, SCommParams
             }
             else if(!strcmp(line,"ustartdelay"))
             {
-                if(1==fscanf(_this->fptr,"%a[^\n]\n",&line2))
+                if(1==fscanf(_this->fptr,"%m[^\n]\n",&line2))
                 {
 
                     if(argchk(line2, 0, 0xffffffff,(unsigned long *) &(newpkg->startdelay)))
@@ -110,7 +110,7 @@ static int parse_phead(SEpbPacketParser *_this,  SEpbParams *newpkg, SCommParams
             }
             else if(!strcmp(line,"enddelay"))
             {
-                if(1==fscanf(_this->fptr,"%a[^\n]\n",&line2))
+                if(1==fscanf(_this->fptr,"%m[^\n]\n",&line2))
                 {
 
                     if(argchk(line2, 0, 0xffffffffUL/1000000UL,(unsigned long *) &(newpkg->interval)))
@@ -129,7 +129,7 @@ static int parse_phead(SEpbPacketParser *_this,  SEpbParams *newpkg, SCommParams
             }
             else if(!strcmp(line,"uenddelay"))
             {
-                if(1==fscanf(_this->fptr,"%a[^\n]\n",&line2))
+                if(1==fscanf(_this->fptr,"%m[^\n]\n",&line2))
                 {
 
                     if(argchk(line2, 0, 0xffffffff,(unsigned long *) &(newpkg->interval)))
@@ -148,7 +148,7 @@ static int parse_phead(SEpbPacketParser *_this,  SEpbParams *newpkg, SCommParams
 
             else if(!strcmp(line,"repeat"))
             {
-                if(1==fscanf(_this->fptr,"%a[^\n]\n",&line2))
+                if(1==fscanf(_this->fptr,"%m[^\n]\n",&line2))
                 {
 
                     if(argchk(line2, 0, 0xffffffff,(unsigned long *) &(newpkg->pkg_amnt)))
@@ -230,7 +230,7 @@ static int parse_pdata(SEpbPacketParser *_this, SEpbParams *params, SCommParams 
     for(lineno=1;;lineno++)
     {
         int scanned;
-        scanned=fscanf(_this->fptr,"#%a[^\n]\n",&line);
+        scanned=fscanf(_this->fptr,"#%m[^\n]\n",&line);
         if(scanned>0)
         {
 #ifdef DEBUGPRINTS
@@ -244,14 +244,14 @@ static int parse_pdata(SEpbPacketParser *_this, SEpbParams *params, SCommParams 
             int err=errno;
             if(err)
                 printf("file (%s) fucked up, %d,%s\n",comm->filename,err,strerror(err));
-                rval=PARSER_READ_EOF;
+            rval=PARSER_READ_EOF;
             break;
         }
 #ifdef DEBUGPRINTS
         else
             printf("NoComments\n");
 #endif
-        scanned=fscanf(_this->fptr,"!%a[^\n]\n",&line);
+        scanned=fscanf(_this->fptr,"!%m[^\n]\n",&line);
         if(scanned>0)
         {
 #ifdef DEBUGPRINTS
@@ -277,7 +277,7 @@ static int parse_pdata(SEpbPacketParser *_this, SEpbParams *params, SCommParams 
             printf("NoCommands\n");
 #endif
 
-        scanned=fscanf(_this->fptr,"%c%u:%a[^\n]\n",&varsign,&vartype,&line);
+        scanned=fscanf(_this->fptr,"%c%u:%m[^\n]\n",&varsign,&vartype,&line);
         if(scanned>0)
         {
             char *foo;

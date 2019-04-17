@@ -48,7 +48,7 @@ static int parse_pdata(SEpbPacketParser *_this, SEpbParams *params, SCommParams 
     for(lineno=1;;lineno++)
     {
         int scanned;
-        scanned=fscanf(_this->fptr,"#%a[^\n]\n",&line);
+        scanned=fscanf(_this->fptr,"#%m[^\n]\n",&line);
         if(scanned>0)
         {
 #ifdef DEBUGPRINTS
@@ -73,7 +73,7 @@ static int parse_pdata(SEpbPacketParser *_this, SEpbParams *params, SCommParams 
             printf("NoComments\n");
 #endif
 
-        scanned=fscanf(_this->fptr,"%c%u:%a[^\n]\n",&varsign,&vartype,&line);
+        scanned=fscanf(_this->fptr,"%c%u:%m[^\n]\n",&varsign,&vartype,&line);
         if(scanned>0)
         {
             char *foo;

@@ -3,8 +3,8 @@
 
 static int G_swap_netmon=0;
 
-#define NETMON_READ_32(value) (G_swap_netmon)?swap32(value):(value)
-#define NETMON_READ_16(value) (G_swap_netmon)?swap16(value):(value)
+#define NETMON_READ_32(value) ((G_swap_netmon)?swap32(value):(value))
+#define NETMON_READ_16(value) ((G_swap_netmon)?swap16(value):(value))
 
 static int parse_phead_netmon1(SEpbPacketParser *_this,  SEpbParams *newpkg, SCommParams *comm);
 static int parse_phead_netmon2(SEpbPacketParser *_this,  SEpbParams *newpkg, SCommParams *comm);
